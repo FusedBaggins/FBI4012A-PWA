@@ -1,8 +1,8 @@
 import http from 'http';
-import routes from './routes';
 import express from "express";
 import bodyParser from 'body-parser';
 
+import routes from './routes';
 
 class Application {
     server: http.Server;
@@ -13,6 +13,7 @@ class Application {
         this.server = http.createServer(this.express);
 
         this._setMiddlewares();
+        this._setRoutes();
     }
 
     private _setMiddlewares(): void {
@@ -23,7 +24,6 @@ class Application {
     private _setRoutes():void{
         this.express.use(routes);
     }
-
 }
 
 export default new Application().server;

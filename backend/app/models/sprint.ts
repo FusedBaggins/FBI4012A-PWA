@@ -1,14 +1,21 @@
 import Sequelize, { Model } from 'sequelize';
 import database from '../database/database';
 
-class Squad extends Model {
-    id!: number;
+class Sprint extends Model {
     name!: string;
+    isActive!: boolean;
+    startDate!: Date;
+    endDate!: Date;
 }
 
-Squad.init(
-    { id: Sequelize.NUMBER, name: Sequelize.STRING },
+Sprint.init(
+    {
+        name: Sequelize.STRING,
+        isActive: Sequelize.BOOLEAN,
+        startDate: Sequelize.DATE,
+        endDate: Sequelize.DATE
+    },
     { sequelize: database.connection, freezeTableName: true }
 );
 
-export default Squad;
+export default Sprint;
