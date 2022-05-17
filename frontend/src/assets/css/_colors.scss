@@ -1,0 +1,21 @@
+$elevations: (
+    00dp: rgba(255, 255, 255, 0),
+    01dp: rgba(255, 255, 255, 0.05),
+    02dp: rgba(255, 255, 255, 0.07),
+    03dp: rgba(255, 255, 255, 0.08),
+    04dp: rgba(255, 255, 255, 0.09),
+    06dp: rgba(255, 255, 255, 0.11),
+    08dp: rgba(255, 255, 255, 0.12),
+    12dp: rgba(255, 255, 255, 0.14),
+    16dp: rgba(255, 255, 255, 0.15),
+    24dp: rgba(255, 255, 255, 0.16),
+);
+
+$font-color: rgba(255, 255, 255, 0.6);
+$background-color: rgba(18, 18, 18, 1);
+
+$form-highlight-color: rgba(144, 202, 249, 1);
+$form-error-color: rgba(255, 82, 82, 1);
+
+$radio-overlay-color: rgba(144, 202, 249, 0.6);
+$button-background-color: rgba(144, 202, 249, 0.5);

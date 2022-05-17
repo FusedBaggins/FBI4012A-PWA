@@ -1,0 +1,144 @@
+@use "sass:math";
+
+$margins: (
+    handset: 32px,
+    tabletPortrait: 86px,
+    tabletLandscape: 128px,
+    webPortrait: 128px,
+    webLandscape: 196px,
+    XLarge: 300px,
+);
+
+$topToolbarHeight: (
+    handset: 60px,
+    tablet: 80px,
+    webPortrait: 65px,
+    webLandscape: 65px,
+);
+
+$defaultAspectRatio: math.div(1, 1.5);
+
+.grid-container {
+    display: grid;
+    gap: 12px 8px;
+}
+
+.grid-span-1 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+.grid-span-2 {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+.grid-span-3 {
+    grid-column: span 3;
+    grid-row: span 1;
+}
+.grid-span-4 {
+    grid-column: span 4;
+    grid-row: span 1;
+}
+
+.grid-span-8 {
+    grid-column: span 8;
+    grid-row: span 1;
+}
+
+.grid-span-all-columns {
+    grid-column: 1/-1;
+}
+
+.custom-aspect-ratio {
+    aspect-ratio: $defaultAspectRatio;
+}
+
+@mixin grid($range) {
+    @if $range == "XSmall" {
+        @media (max-width: 599px) {
+            @content;
+        }
+    }
+
+    @if $range == "Small" {
+        @media (min-width: 600px) and (max-width: 959px) {
+            @content;
+        }
+    }
+    @if $range == "Medium" {
+        @media (min-width: 960px) and (max-width: 1279px) {
+            @content;
+        }
+    }
+    @if $range == "Large" {
+        @media (min-width: 1280px) and (max-width: 1919px) {
+            @content;
+        }
+    }
+
+    @if $range == "XLarge" {
+        @media (min-width: 1920px) {
+            @content;
+        }
+    }
+
+    @if $range == "Handset" {
+        @media (max-width: 599.98px) and (orientation: portrait), (max-width: 959.98px) and (orientation: landscape) {
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            @content;
+        }
+    }
+    @if $range == "Tablet" {
+        @media (min-width: 600px) and (max-width: 839.98px) and (orientation: portrait),
+            (min-width: 960px) and (max-width: 1280px) and (orientation: landscape) {
+            .grid-container {
+                grid-template-columns: repeat(12, 1fr);
+            }
+            @content;
+        }
+    }
+    @if $range == "Web" {
+        @media (min-width: 840px) and (orientation: portrait), (min-width: 1280px) and (orientation: landscape) {
+            @content;
+        }
+    }
+    @if $range == "HandsetPortrait" {
+        @media (max-width: 599.98px) and (orientation: portrait) {
+            @content;
+        }
+    }
+    @if $range == "TabletPortrait" {
+        @media (min-width: 600px) and (max-width: 839.98px) and (orientation: portrait) {
+            @content;
+        }
+    }
+    @if $range == "WebPortrait" {
+        @media (min-width: 840px) and (orientation: portrait) {
+            .grid-container {
+                grid-template-columns: repeat(12, 1fr);
+            }
+            @content;
+        }
+    }
+    @if $range == "HandsetLandscape" {
+        @media (max-width: 959.98px) and (orientation: landscape) {
+            @content;
+        }
+    }
+    @if $range == "TabletLandscape" {
+        @media (min-width: 960px) and (max-width: 1280px) and (orientation: landscape) {
+            @content;
+        }
+    }
+    @if $range == "WebLandscape" {
+        @media (min-width: 1281px) and (orientation: landscape) {
+            .grid-container {
+                grid-template-columns: repeat(12, 1fr);
+            }
+            @content;
+        }
+    }
+}
