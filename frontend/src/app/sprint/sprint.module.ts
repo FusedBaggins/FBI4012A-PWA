@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { SprintRoutingModule } from './sprint-routing.module';
 
@@ -8,6 +9,7 @@ import { SprintRoutingModule } from './sprint-routing.module';
   declarations: [],
   imports: [
     CommonModule,
+    HttpClientModule,
     SprintRoutingModule
   ]
 })
