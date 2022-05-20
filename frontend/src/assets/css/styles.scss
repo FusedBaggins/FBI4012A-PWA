@@ -3,3 +3,25 @@
 @use "./typography";
 @use "./colors" as colors;
 @use "./grid" as responsivity;
+@use "./custom-material-theme";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+body,
+.mat-bottom-sheet-container.custom-bottom-sheet-container {
+  background-color: colors.$background-color;
+}
+
+button {
+  background-color: unset;
+  border: unset;
+  outline: none;
+  cursor: pointer;
+}
