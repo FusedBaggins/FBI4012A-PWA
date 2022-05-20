@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
+import Sprint from "../models/sprint";
 
 export default {
-    list(req: Request, res: Response): any {
-        return res.status(200).json({});
+    async list(req: Request, res: Response): Promise<any> {
+        let sprints = await Sprint.findAll({});
+        return res.status(200).json(sprints);
     },
-    detail(req: Request, res: Response): any {
+    async detail(req: Request, res: Response): Promise<any> {
         return res.status(200).json({});
     },
     create(req: Request, res: Response): any {

@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
+import Squad from "../models/squad";
 
 export default {
-    list(req: Request, res: Response): any {
-        return res.status(200).json({});
+    async list(req: Request, res: Response): Promise<any> {
+        let squads = await Squad.findAll({});
+        return res.status(200).json(squads);
     },
     detail(req: Request, res: Response): any {
         return res.status(200).json({});
