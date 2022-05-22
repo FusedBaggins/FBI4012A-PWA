@@ -1,0 +1,92 @@
+@use "./colors" as colors;
+
+@font-face {
+    font-family: "roboto-light";
+    src: url("/assets/fonts/Roboto-Light.ttf") format("opentype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "roboto-regular";
+    src: url("/assets/fonts/Roboto-Regular.ttf") format("opentype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "roboto-medium";
+    src: url("/assets/fonts/Roboto-Medium.ttf") format("opentype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "roboto-bold";
+    src: url("/assets/fonts/Roboto-Bold.ttf") format("opentype");
+    font-display: swap;
+}
+
+html,
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.subtitle-1,
+.subtitle-2,
+.body-1,
+.body-2,
+.button {
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.subtitle-1,
+.subtitle-2,
+.body-1,
+.body-2,
+.button {
+    color: colors.$font-color;
+}
+
+h1 {
+    font: 6rem roboto-light;
+}
+h2 {
+    font: 3.75rem roboto-light;
+}
+h3 {
+    font: 3rem roboto-regular;
+}
+h4 {
+    font: 2.125rem roboto-regular;
+}
+h5 {
+    font: 1.5rem roboto-regular;
+}
+h6 {
+    font: 1.25rem roboto-medium;
+}
+
+.body-1,
+.subtitle-1 {
+    font: 1rem roboto-regular;
+}
+.subtitle-2 {
+    font: 0.875rem roboto-medium;
+}
+
+.body-2 {
+    font: 0.875rem roboto-regular;
+}
+
+.button {
+    font: 0.875rem roboto-medium;
+    text-transform: capitalize;
+}
