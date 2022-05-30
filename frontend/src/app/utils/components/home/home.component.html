@@ -1,1 +1,16 @@
-<p>home works!</p>
+<div class="column center-horizontal-align full-size default-margin container">
+    <div class="column title">
+        <h4>Bem-vindo</h4>
+        <h6>Para onde você quer ir?</h6>
+    </div>
+    <div class="actions no-wrap" [ngClass]="actionsDirection">
+        <button matRipple [matRippleColor]="rippleColor" class="button" (click)="onNavigate('sprint')">
+            <mat-icon svgIcon="insights"></mat-icon>
+            <span>Ranking</span>
+        </button>
+        <button matRipple [matRippleColor]="rippleColor" class="button">
+            <mat-icon svgIcon="settings"></mat-icon>
+            <span>Configurações</span>
+        </button>
+    </div>
+</div>
