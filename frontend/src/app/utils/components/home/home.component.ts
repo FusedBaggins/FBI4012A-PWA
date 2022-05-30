@@ -9,6 +9,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
+import { rippleColor } from '../../constants/ripple-color';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
   private _breakpoints: any[];
 
   constructor(
-    private _router:Router,
+    private _router: Router,
     private _sanitizer: DomSanitizer,
     private _iconRegistry: MatIconRegistry,
     private _breakpointObserver: BreakpointObserver
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit {
       Breakpoints.WebLandscape
     ];
     this._isDestroyed = new Subject();
-    this.rippleColor = 'rgba(255, 255, 255, 0.11)';
+    this.rippleColor = rippleColor;
     this.actionsDirection = 'column';
 
     this._sanitizeIcons();
@@ -73,7 +74,7 @@ export class HomeComponent implements OnInit {
     switch (to) {
       case 'sprint':
         this._router.navigate(['sprint']);
-      break;
+        break;
       default:
         break;
     }

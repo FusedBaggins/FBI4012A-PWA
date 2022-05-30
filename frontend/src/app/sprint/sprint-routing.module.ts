@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { SprintListComponent } from './componentes/sprint-list/sprint-list.component';
+
+const routes: Routes = [
+  { path: '', component: SprintListComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
