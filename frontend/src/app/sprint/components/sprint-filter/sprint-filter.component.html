@@ -1,0 +1,26 @@
+<div class="column default-margin container">
+    <div class="row center-horizontal-align header">
+        <h5>Filtrar por</h5>
+    </div>
+    <form class="column content" [formGroup]="form">
+        <mat-form-field class="" appearance="fill">
+            <mat-label>Nome</mat-label>
+            <input matInput placeholder="" formControlName="name">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Intervalo de datas</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate placeholder="Início" formControlName="startDate">
+                <input matEndDate placeholder="Término" formControlName="endDate">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+        <h6 class="radio-group-title">Situação</h6>
+        <mat-radio-group class="column" formControlName="status">
+            <mat-radio-button *ngFor="let status of statuses" [value]="status">
+                {{status}}
+            </mat-radio-button>
+        </mat-radio-group>
+    </form>
+</div>
