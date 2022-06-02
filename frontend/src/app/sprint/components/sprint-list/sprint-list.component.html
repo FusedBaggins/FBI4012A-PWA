@@ -5,8 +5,25 @@
 <div class="column default-margin sprints">
     <div class="row title center-vertical-align space-between">
         <h4>Sprints</h4>
-        <button matRipple [matRippleColor]="rippleColor" class="button search-button">
+        <button matRipple [matRippleColor]="rippleColor" class="button search-button" (click)="onFilter()">
             <mat-icon svgIcon="search"></mat-icon>
         </button>
+    </div>
+    <mat-chip-list class="sort">
+        <mat-chip class="button">One fish</mat-chip>
+        <mat-chip class="button">Two fish</mat-chip>
+    </mat-chip-list>
+    <div class="column content">
+        <ng-container *ngIf="sprints$ | async as sprints">
+            <button *ngFor="let sprint of sprints" class="column sprint" matRipple [matRippleColor]="rippleColor">
+                <span class="body-1">Teste</span>
+                <span class="subtitle-2">teste</span>
+            </button>
+
+            <div class="column" *ngIf="!sprints.length">
+                <h6>Oooops!</h6>
+                <span class="subtitle-1">Não há nada para mostrar aqui :( </span>
+            </div>
+        </ng-container>
     </div>
 </div>

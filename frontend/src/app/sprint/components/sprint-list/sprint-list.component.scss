@@ -6,8 +6,15 @@
     background-color: map-get($map: colors.$elevations, $key: 02dp);
 }
 
-.search-button{
+.search-button {
     border-radius: 50%;
+}
+
+.content {
+    .sprint {
+        background-color: map-get($map: colors.$elevations, $key: 02dp);
+        border-radius: 8px;
+    }
 }
 
 @include responsivity.grid("Handset") {
@@ -15,12 +22,33 @@
         height: 40%;
     }
 
-    .sprints{
+    .sprints {
         padding-top: 32px;
     }
 
-    .search-button{
+    .search-button {
         padding: 4px 6px;
+    }
+
+    .sort{
+        padding: 8px 0 0 0;
+    }
+
+    .content {
+        padding: 32px 0 0 0;
+
+        .sprint {
+            padding: 16px;
+            margin: 6px 0;
+        }
+
+        .sprint:first-child {
+            margin-top: 0;
+        }
+
+        .sprint:last-child {
+            margin-bottom: 0;
+        }
     }
 }
 
