@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 
 import { SprintRoutingModule } from './sprint-routing.module';
-import { SprintListComponent } from './componentes/sprint-list/sprint-list.component';
+import { SprintListComponent } from './components/sprint-list/sprint-list.component';
 import { MatRippleModule } from '@angular/material/core';
 
 
