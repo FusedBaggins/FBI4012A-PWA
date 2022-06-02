@@ -14,12 +14,14 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { SprintRoutingModule } from './sprint-routing.module';
 import { SprintListComponent } from './components/sprint-list/sprint-list.component';
 import { SprintFilterComponent } from './components/sprint-filter/sprint-filter.component';
+import { SprintDetailComponent } from './components/sprint-detail/sprint-detail.component';
 
 
 @NgModule({
   declarations: [
     SprintListComponent,
-    SprintFilterComponent
+    SprintFilterComponent,
+    SprintDetailComponent
   ],
   imports: [
     FormsModule,
