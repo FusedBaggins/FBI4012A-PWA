@@ -2,9 +2,6 @@
 @use "/src/assets/scss/colors" as colors;
 @use "/src/assets/scss/grid" as responsivity;
 
-.dashboard {
-    background-color: map-get($map: colors.$elevations, $key: 02dp);
-}
 
 .search-button {
     border-radius: 50%;
@@ -18,10 +15,7 @@
 }
 
 @include responsivity.grid("Handset") {
-    .dashboard {
-        height: 40%;
-    }
-
+    
     .sprints {
         padding-top: 32px;
     }

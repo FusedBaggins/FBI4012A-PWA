@@ -31,6 +31,10 @@ button {
   box-sizing: border-box;
 }
 
+.action-header {
+  background-color: map-get($map: colors.$elevations, $key: 02dp);
+}
+
 @include responsivity.grid("Handset") {
   $margin: map-get(
     $map: responsivity.$margins,
@@ -52,6 +56,10 @@ button {
 
   .error-button + .error-button {
     margin-left: 8px;
+  }
+
+  .action-header {
+    height: 40%;
   }
 }
 

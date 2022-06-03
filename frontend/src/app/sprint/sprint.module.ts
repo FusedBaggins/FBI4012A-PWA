@@ -23,7 +23,7 @@ import { SprintDetailComponent } from './components/sprint-detail/sprint-detail.
   declarations: [
     SprintListComponent,
     SprintFilterComponent,
-    SprintDetailComponent
+    SprintDetailComponent,
   ],
   imports: [
     FormsModule,

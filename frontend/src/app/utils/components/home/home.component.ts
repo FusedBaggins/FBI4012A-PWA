@@ -75,6 +75,9 @@ export class HomeComponent implements OnInit {
       case 'sprint':
         this._router.navigate(['sprint']);
         break;
+      case 'settings':
+        this._router.navigate(['settings']);
+        break;
       default:
         break;
     }
