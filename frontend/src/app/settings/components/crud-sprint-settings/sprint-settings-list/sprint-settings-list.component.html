@@ -1,0 +1,19 @@
+<div class="column center-horizontal-align default-margin action-header">
+    <h4>Configuração de Sprint</h4>
+    <span class="body-1">Criar, alterar e remover configurações.
+    </span>
+</div>
+
+<div class="column default-margin content">
+    <ng-container *ngIf="sprintSettings$ | async as sprints">
+        <button *ngFor="let sprint of sprints" class="column sprint" matRipple [matRippleColor]="rippleColor">
+            <span class="body-1">Teste</span>
+            <span class="subtitle-2">teste</span>
+        </button>
+
+        <div class="column" *ngIf="!sprints.length">
+            <h6>Oooops!</h6>
+            <span class="subtitle-1">Não há nada para mostrar aqui :( </span>
+        </div>
+    </ng-container>
+</div>

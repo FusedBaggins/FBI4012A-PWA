@@ -1,0 +1,20 @@
+@use "sass:map";
+@use "/src/assets/scss/colors" as colors;
+@use "/src/assets/scss/grid" as responsivity;
+
+
+@include responsivity.grid("Handset") {
+    .content {
+        padding-top: 32px;
+    }
+
+}
+
+@include responsivity.grid("Tablet") {
+}
+
+@include responsivity.grid("TabletLandscape") {
+}
+
+@include responsivity.grid("WebLandscape") {
+}
