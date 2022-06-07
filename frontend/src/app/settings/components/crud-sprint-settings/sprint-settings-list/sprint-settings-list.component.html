@@ -5,13 +5,14 @@
 </div>
 
 <div class="column default-margin content">
-    <ng-container *ngIf="sprintSettings$ | async as sprints">
-        <button *ngFor="let sprint of sprints" class="column sprint" matRipple [matRippleColor]="rippleColor">
-            <span class="body-1">Teste</span>
-            <span class="subtitle-2">teste</span>
+    <ng-container *ngIf="sprintSettings$ | async as settings">
+        <button *ngFor="let setting of settings; index as i" class="row button" matRipple [matRippleColor]="rippleColor"
+            (click)="onNavigate(setting.id)">
+            <h6>{{i+1}}</h6>
+            <h6>{{setting.name}}</h6>
         </button>
 
-        <div class="column" *ngIf="!sprints.length">
+        <div class="column" *ngIf="!settings.length">
             <h6>Oooops!</h6>
             <span class="subtitle-1">Não há nada para mostrar aqui :( </span>
         </div>

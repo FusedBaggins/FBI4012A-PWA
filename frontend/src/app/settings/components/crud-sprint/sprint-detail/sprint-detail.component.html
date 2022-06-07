@@ -1,0 +1,38 @@
+<div class="column center-horizontal-align default-margin action-header">
+    <h4>Sprint</h4>
+    <span class="body-1">Criar, alterar e remover sprint.
+    </span>
+</div>
+<form class="column default-margin content" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Intervalo de datas</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="Início" formControlName="startDate">
+            <input matEndDate placeholder="Término" formControlName="endDate">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Configuração da Sprint</mat-label>
+        <mat-select formControlName="setting">
+            <mat-option *ngFor="let setting of sprintSettings$ | async as settings" [value]="setting.id">
+                {{setting.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="column">
+        <span class="subtitle-2 squads">Squads participantes</span>
+        <mat-chip-list>
+            <mat-chip class="button" *ngFor="let squad of squads$ | async as squads">
+                {{squad.name}}
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+    <button mat-fab type="submit" color="primary" class="custom-fab-button button">
+        <mat-icon [svgIcon]="icon"></mat-icon>
+    </button>
+</form>

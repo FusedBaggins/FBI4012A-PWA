@@ -1,0 +1,15 @@
+<div class="column center-horizontal-align default-margin action-header">
+    <h4>Squad</h4>
+    <span class="body-1">Criar uma nova Squad.
+    </span>
+</div>
+<!--  (ngSubmit)="onSubmit()" -->
+<form class="column default-margin content" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name" autocomplete="off">
+    </mat-form-field>
+    <button mat-fab type="submit" color="primary" class="custom-fab-button button">
+        <mat-icon [svgIcon]="icon"></mat-icon>
+    </button>
+</form>

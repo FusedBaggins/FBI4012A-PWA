@@ -49,6 +49,11 @@ button {
     height: 80vh;
   }
 
+  .custom-fab-button{
+    right: calc($margin + ($margin/2));
+    bottom: $margin;
+  }
+
   .error-button {
     padding: 16px 12px;
     margin: 16px 0 0 0;

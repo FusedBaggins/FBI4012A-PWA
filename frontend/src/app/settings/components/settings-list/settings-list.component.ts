@@ -27,7 +27,6 @@ export class SettingsListComponent implements OnInit {
   onNavigate(to?: string): void {
     switch (to) {
       case 'user':
-
         this._router.navigate(['settings', 'user']);
         break;
       case 'sprint':
@@ -37,7 +36,7 @@ export class SettingsListComponent implements OnInit {
         this._router.navigate(['settings', 'squad']);
         break;
       case 'sprint-settings':
-        //this._router.navigate(['settings']);
+        this._router.navigate(['settings', 'sprint-settings']);
         break;
       default:
         break;
