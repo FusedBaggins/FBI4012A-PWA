@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 // Third-party
 import { Subject, takeUntil } from 'rxjs';
 
 //Angular material
 import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
-import { rippleColor } from '../../constants/ripple-color';
+// Local
+import { rippleColor } from 'src/app/utils/constants/ripple-color';
+
 
 @Component({
   selector: 'app-home',
