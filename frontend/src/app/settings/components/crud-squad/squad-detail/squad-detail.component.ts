@@ -1,10 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+// Angular Material
+import { MatIconRegistry } from '@angular/material/icon';
+
+// Third-party
 import { of, Subject, switchMap, takeUntil } from 'rxjs';
+
+// Local
 import { Squad } from 'src/app/settings/interfaces/squad';
 import { SquadService } from 'src/app/squad/services/squad.service';
 
@@ -21,7 +27,8 @@ export class SquadDetailComponent implements OnInit, OnDestroy {
   private _isDestroyed$: Subject<void>;
   private _createOrUpdateSubscription$: Subject<void>;
 
-  constructor(private _router: Router,
+  constructor(
+    private _router: Router,
     private _sanitizer: DomSanitizer,
     private _formBuilder: FormBuilder,
     private _squadService: SquadService,

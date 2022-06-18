@@ -22,6 +22,7 @@ export class SprintDetailComponent implements OnInit {
 
   icon: string;
   form: FormGroup;
+  update!: boolean;
   squads$!: Observable<Squad[]>;
   sprintSettings$!: Observable<SprintSetting[]>;
 
@@ -96,8 +97,13 @@ export class SprintDetailComponent implements OnInit {
       next: (value) => {
         if (value) {
           this.icon = 'edit';
+          this.update = true;
           this.form.patchValue(value);
+          return;
         }
+
+        this.update = false;
+        return;
       },
       error: (error) => console.log(error)
     });

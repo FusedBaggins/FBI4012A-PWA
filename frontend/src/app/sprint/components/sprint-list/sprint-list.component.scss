@@ -3,11 +3,8 @@
 @use "/src/assets/scss/grid" as responsivity;
 
 
-.search-button {
-    border-radius: 50%;
-}
-
 .content {
+    box-sizing: border-box;
     .sprint {
         background-color: map-get($map: colors.$elevations, $key: 02dp);
         border-radius: 8px;
@@ -15,21 +12,22 @@
 }
 
 @include responsivity.grid("Handset") {
-    
+    $margin: map-get(
+        $map: responsivity.$margins,
+        $key: "handset",
+    );
+
     .sprints {
         padding-top: 32px;
     }
 
-    .search-button {
-        padding: 4px 6px;
-    }
 
-    .sort{
-        padding: 8px 0 0 0;
+    .sort {
+        padding: 8px $margin 0 $margin;
     }
 
     .content {
-        padding: 32px 0 0 0;
+        padding-top: 32px;
 
         .sprint {
             padding: 16px;

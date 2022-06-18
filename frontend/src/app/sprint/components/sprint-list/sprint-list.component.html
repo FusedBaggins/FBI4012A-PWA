@@ -2,18 +2,20 @@
     <h4>Dashboard</h4>
     <h6>Implementar dashboard</h6>
 </div>
-<div class="column default-margin sprints">
-    <div class="row title center-vertical-align space-between">
+<div class="column sprints">
+    <div class="row title center-vertical-align space-between default-margin">
         <h4>Sprints</h4>
-        <button matRipple [matRippleColor]="rippleColor" class="button search-button" (click)="onFilter()">
+        <button matRipple [matRippleColor]="rippleColor" class="button icon-button" (click)="onFilter()">
             <mat-icon svgIcon="search"></mat-icon>
         </button>
     </div>
-    <mat-chip-list class="sort">
-        <mat-chip class="button">One fish</mat-chip>
-        <mat-chip class="button">Two fish</mat-chip>
+    <mat-chip-list class="row no-wrap sort">
+        <mat-chip class="button">Nome</mat-chip>
+        <mat-chip class="button">Status</mat-chip>
+        <mat-chip class="button">Data inicial</mat-chip>
+        <mat-chip class="button">Data final</mat-chip>
     </mat-chip-list>
-    <div class="column content">
+    <div class="column content default-margin">
         <ng-container *ngIf="sprints$ | async as sprints">
             <button *ngFor="let sprint of sprints" class="column sprint" matRipple [matRippleColor]="rippleColor">
                 <span class="body-1">Teste</span>

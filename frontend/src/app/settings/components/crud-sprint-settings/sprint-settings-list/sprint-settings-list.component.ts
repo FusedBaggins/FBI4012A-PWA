@@ -1,5 +1,9 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+
+// Angular Material
+import { MatIconRegistry } from '@angular/material/icon';
 
 // Third-party
 import { Observable } from 'rxjs';
@@ -8,6 +12,7 @@ import { Observable } from 'rxjs';
 import { rippleColor } from 'src/app/utils/constants/ripple-color';
 import { SprintSetting } from 'src/app/settings/interfaces/sprint-setting';
 import { SprintSettingsService } from 'src/app/settings/services/sprint-settings.service';
+
 
 @Component({
   selector: 'app-sprint-settings-list',
@@ -21,12 +26,23 @@ export class SprintSettingsListComponent implements OnInit {
 
   constructor(
     private _router: Router,
+    private _sanitizer: DomSanitizer,
+    private _iconRegistry: MatIconRegistry,
     private _sprintSettingsService: SprintSettingsService
   ) {
+    this._sanitizeIcons();
     this.rippleColor = rippleColor;
   }
 
+  private _sanitizeIcons(): void {
+    this._iconRegistry.addSvgIcon('add', this._sanitizer.bypassSecurityTrustResourceUrl('assets/icons/add.svg'));
+  }
+
   onNavigate(to: number) {
+    if (to === -1) {
+      this._router.navigate(['settings', 'new', 'sprint-settings']);
+      return;
+    }
     this._router.navigate(['settings', 'sprint-settings', to]);
   }
 

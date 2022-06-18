@@ -1,19 +1,19 @@
-<div class="column center-horizontal-align default-margin action-header">
-    <h4>Sprint</h4>
-    <span class="body-1">Criar, alterar e remover sprints.
-    </span>
-</div>
+<app-header title="sprint"></app-header>
 
 <div class="column default-margin content">
-    <!-- <table>
-        <thead>
-            <tr>
-                <th class="subtitle-2">#</th>
-                <th class="subtitle-2">Nome</th>
-                <th class="subtitle-2">Início</th>
-                <th class="subtitle-2">Término</th>
-            </tr>
-        </thead>
-    </table> -->
-    <!-- <button class="button" matRipple [matRippleColor]="rippleColor" *ngFor="let button of buttons" (click)="onNavigate(button.navigateTo)">{{button.label}}</button> -->
+    <ng-container *ngIf="sprints$ | async as sprints">
+        <button *ngFor="let sprint of sprints; index as i" class="row button" matRipple [matRippleColor]="rippleColor"
+            (click)="onNavigate(sprint.id)">
+            <h6>{{i+1}}</h6>
+            <h6>{{sprint.name}}</h6>
+        </button>
+
+        <div class="column" *ngIf="!sprints.length">
+            <h6>Oooops!</h6>
+            <span class="subtitle-1">Não há nada para mostrar aqui :( </span>
+        </div>
+    </ng-container>
+    <button mat-fab type="button" color="primary" class="custom-fab-button" (click)="onNavigate(-1)">
+        <mat-icon svgIcon="add"></mat-icon>
+    </button>
 </div>
