@@ -14,8 +14,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MatOptionModule, MatRippleModule } from '@angular/material/core';
 
 // Local
+import { UtilsModule } from '../utils/utils.module';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsListComponent } from './components/settings-list/settings-list.component';
+import { SquadListComponent } from './components/crud-squad/squad-list/squad-list.component';
 import { SprintListComponent } from './components/crud-sprint/sprint-list/sprint-list.component';
 import { SquadDetailComponent } from './components/crud-squad/squad-detail/squad-detail.component';
 import { SprintDetailComponent } from './components/crud-sprint/sprint-detail/sprint-detail.component';
@@ -23,16 +25,15 @@ import { SprintSettingsListComponent } from './components/crud-sprint-settings/s
 import { SprintSettingsDetailComponent } from './components/crud-sprint-settings/sprint-settings-detail/sprint-settings-detail.component';
 
 
-
-
 @NgModule({
   declarations: [
-    SettingsListComponent,
+    SquadListComponent,
     SprintListComponent,
-    SprintSettingsListComponent,
-    SprintSettingsDetailComponent,
-    SprintDetailComponent,
     SquadDetailComponent,
+    SettingsListComponent,
+    SprintDetailComponent,
+    SprintSettingsListComponent,
+    SprintSettingsDetailComponent
   ],
   imports: [
     FormsModule,
@@ -51,9 +52,11 @@ import { SprintSettingsDetailComponent } from './components/crud-sprint-settings
     MatFormFieldModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    
+
     // Local
+    UtilsModule,
     SettingsRoutingModule
+
   ]
 })
 export class SettingsModule { }
