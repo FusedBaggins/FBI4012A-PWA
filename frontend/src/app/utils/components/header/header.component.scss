@@ -2,14 +2,9 @@
 @use "/src/assets/scss/colors" as colors;
 @use "/src/assets/scss/grid" as responsivity;
 
-
 @include responsivity.grid("Handset") {
-    .content {
-        padding-top: 32px;
-    }
-
-    .squads{
-        padding: 0 0 16px 0;
+    .title {
+        padding: 0 0 0 16px;
     }
 }
 

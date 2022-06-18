@@ -1,5 +1,9 @@
-<div class="column center-horizontal-align default-margin action-header">
-    <h4>{{title | titlecase}}</h4>
-    <span class="body-1">Criar, alterar e remover {{title}}.
-    </span>
+<div class="column center-horizontal-align default-margin full-width action-header">
+    <div class="row">
+        <button matRipple [matRippleColor]="rippleColor" class="button icon-button" (click)="onGoBack()">
+            <mat-icon svgIcon="arrow_back"></mat-icon>
+        </button>
+        <h4 class="row center-vertical-align title">{{title | titlecase}}</h4>
+    </div>
+    <span class="body-1">{{subtitle}}</span>
 </div>
