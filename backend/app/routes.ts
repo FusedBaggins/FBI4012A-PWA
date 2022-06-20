@@ -7,7 +7,7 @@ import SprintConfigurationController from "../app/controllers/sprint-configurati
 const routes = Router();
 
 routes.get("/squad", SquadController.list);
-routes.get("/sprint", SquadController.list);
+routes.get("/sprint", SprintController.list);
 routes.get("/ranking", RankingController.list);
 routes.get("/sprint-configuration", SprintConfigurationController.list);
 

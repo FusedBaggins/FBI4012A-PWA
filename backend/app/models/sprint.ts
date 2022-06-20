@@ -2,6 +2,7 @@ import Sequelize, { Model } from 'sequelize';
 import database from '../database/database';
 
 class Sprint extends Model {
+    id!: number;
     name!: string;
     isActive!: boolean;
     startDate!: Date;
