@@ -23,15 +23,13 @@ export default {
 
         try {
             let sprint = await Sprint.create(obj);
-            console.log(sprint.id);
-
-            let histories = await History.bulkCreate(
+            await History.bulkCreate(
                 squads.map(squad => {
                     return { sprintId: sprint.id, squadId: squad }
                 })
             );
 
-            return res.status(200).json([sprint, histories]);
+            return res.status(204).json({});
 
         } catch (error) {
             return res.status(400).json(error);
@@ -44,7 +42,7 @@ export default {
 
         delete obj.id;
         delete obj.squads;
-        
+
         let sprint = await Sprint.update(obj, { where: { id: id } });
         if (sprint[0]) {
             if (squads.length) {
