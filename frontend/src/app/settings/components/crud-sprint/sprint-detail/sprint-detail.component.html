@@ -15,19 +15,31 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Configuração da Sprint</mat-label>
-        <mat-select formControlName="setting">
+        <mat-select formControlName="sprintConfigurationId">
             <mat-option *ngFor="let setting of sprintSettings$ | async as settings" [value]="setting.id">
                 {{setting.name}}</mat-option>
         </mat-select>
     </mat-form-field>
-    <div class="column">
-        <span class="subtitle-2 squads">Squads participantes</span>
-        <mat-chip-list>
-            <mat-chip class="button" *ngFor="let squad of squads$ | async as squads">
-                {{squad.name}}
-            </mat-chip>
-        </mat-chip-list>
-    </div>
+    <ng-container *ngIf="form.get('squads') as control">
+        <mat-form-field *ngIf="squads$ | async as squads" appearance="fill" class="row">
+            <mat-label>Squads participantes</mat-label>
+            <mat-chip-list #chipList>
+                <mat-chip *ngFor="let value of control.value" (removed)="onRemoveSquad(value)">
+                    {{value.name}}
+                    <button matChipRemove>
+                        <mat-icon svgIcon="cancel"></mat-icon>
+                    </button>
+                </mat-chip>
+            </mat-chip-list>
+            <input formControlName="squad" [matChipInputFor]="chipList" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectSquad($event)">
+                <mat-option *ngFor="let squad of filteredSquads$ | async as filteredSquads" [value]="squad">
+                    {{squad.name}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </ng-container>
+    <button mat-button type="button" color="warn" *ngIf="update" (click)="onDelete()">Remover</button>
     <button mat-fab type="submit" color="primary" class="custom-fab-button button">
         <mat-icon [svgIcon]="icon"></mat-icon>
     </button>

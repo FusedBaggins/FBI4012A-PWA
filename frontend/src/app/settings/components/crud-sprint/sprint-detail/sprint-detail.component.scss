@@ -2,14 +2,19 @@
 @use "/src/assets/scss/colors" as colors;
 @use "/src/assets/scss/grid" as responsivity;
 
+.remove-button{
+    background-color: map-get($map: colors.$elevations, $key: 02dp);
+    border-radius: 12px;
+}
+
 
 @include responsivity.grid("Handset") {
     .content {
         padding-top: 32px;
     }
 
-    .squads {
-        padding: 0 0 16px 0;
+    .remove-button{
+        padding: 12px 0 ;
     }
 }
 
