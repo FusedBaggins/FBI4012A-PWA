@@ -26,7 +26,11 @@ export default {
         if (configuration[0]) return res.status(200).json({});
         return res.status(404).json({});
     },
-    delete(req: Request, res: Response): any {
-        return res.status(200).json({});
+    async delete(req: Request, res: Response): Promise<any> {
+        const id: any = req.params.id;
+        let configuration = await SprintConfiguration.destroy({ where: { id: id } });
+        if (configuration) return res.status(200).json(configuration);
+
+        return res.status(404).json({});
     }
 }
