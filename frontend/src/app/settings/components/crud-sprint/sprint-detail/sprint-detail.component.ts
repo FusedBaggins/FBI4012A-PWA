@@ -5,12 +5,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Angular Material
+import { MatDialog } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 // Third-party
 import { delay, map, Observable, of, startWith, Subject, switchMap, takeUntil } from 'rxjs';
-
 
 // Local
 import { Squad } from 'src/app/settings/interfaces/squad';
@@ -19,8 +20,9 @@ import { SquadService } from 'src/app/squad/services/squad.service';
 import { SprintService } from 'src/app/sprint/services/sprint.service';
 import { SprintSetting } from 'src/app/settings/interfaces/sprint-setting';
 import { snackbarDuration } from 'src/app/utils/constants/snackbar-duration';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { ConfirmationDialog } from 'src/app/utils/interfaces/confirmation-dialog';
 import { SprintSettingsService } from 'src/app/settings/services/sprint-settings.service';
+import { ConfirmationDialogComponent } from 'src/app/utils/components/confirmation-dialog/confirmation-dialog.component';
 
 
 @Component({
@@ -40,11 +42,13 @@ export class SprintDetailComponent implements OnInit {
   sprintSettings$!: Observable<SprintSetting[]>;
 
   private _isDestroyed$: Subject<void>;
+  private _dialogSubscription$: Subject<void>;
   private _snackbarSubscription$: Subject<void>;
   private _sprintChangeSubscription$: Subject<void>;
 
   constructor(
     private _router: Router,
+    private _dialog: MatDialog,
     private _snackbar: MatSnackBar,
     private _sanitizer: DomSanitizer,
     private _formBuilder: FormBuilder,
@@ -69,6 +73,7 @@ export class SprintDetailComponent implements OnInit {
     this.icon = 'add';
     this.rippleColor = rippleColor;
     this._isDestroyed$ = new Subject();
+    this._dialogSubscription$ = new Subject();
     this._snackbarSubscription$ = new Subject();
     this._sprintChangeSubscription$ = new Subject();
   }
@@ -108,26 +113,37 @@ export class SprintDetailComponent implements OnInit {
   }
 
   onDelete(): void {
-    if (this.update) {
-      const id: number = this.form.get('id')?.value;
-      this._sprintService.deleteSprint(id).pipe(
-        takeUntil(this._sprintChangeSubscription$)
-      ).subscribe({
-        next: () => {
-          const snackbar = this._snackbar.open('Sprint removida', 'OK', { duration: snackbarDuration });
-          this._snackbarSubscription$.next();
-
-          snackbar.afterDismissed().pipe(
-            takeUntil(this._sprintChangeSubscription$)
-          ).subscribe(() => {
-            this._router.navigate(['settings', 'sprint']);
-          })
-        },
-        error: (error: HttpErrorResponse) => {
-          this._errorRequestHandler(error);
-        }
-      })
+    const dialogData: ConfirmationDialog = {
+      title: 'Remover',
+      description: `Você deseja excluir "${this.form.get('name')?.value}"?`,
     }
+
+    this._dialogSubscription$.next();
+    const dialog = this._dialog.open(ConfirmationDialogComponent, { data: dialogData, width:'80%' });
+    dialog.afterClosed().pipe(
+      takeUntil(this._dialogSubscription$),
+      switchMap(value => {
+        if (value) {
+          const id: number = this.form.get('id')?.value;
+          return this._sprintService.deleteSprint(id);
+        }
+        return of();
+      })
+    ).subscribe({
+      next: () => {
+        const snackbar = this._snackbar.open('Sprint removida', 'OK', { duration: snackbarDuration });
+        this._snackbarSubscription$.next();
+
+        snackbar.afterDismissed().pipe(
+          takeUntil(this._sprintChangeSubscription$)
+        ).subscribe(() => {
+          this._router.navigate(['settings', 'sprint']);
+        })
+      },
+      error: (error: HttpErrorResponse) => {
+        this._errorRequestHandler(error);
+      }
+    });
   }
 
   onSubmit(): void {
@@ -229,6 +245,8 @@ export class SprintDetailComponent implements OnInit {
   ngOnDestroy(): void {
     this._isDestroyed$.next();
     this._isDestroyed$.complete();
+    this._dialogSubscription$.next();
+    this._dialogSubscription$.complete();
     this._snackbarSubscription$.next();
     this._snackbarSubscription$.complete();
     this._sprintChangeSubscription$.next();

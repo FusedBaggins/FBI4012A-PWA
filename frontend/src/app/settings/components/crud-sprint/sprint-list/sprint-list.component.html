@@ -2,10 +2,13 @@
 
 <div class="column default-margin content">
     <ng-container *ngIf="sprints$ | async as sprints">
-        <button *ngFor="let sprint of sprints; index as i" class="row button" matRipple [matRippleColor]="rippleColor"
+        <button *ngFor="let sprint of sprints; index as i" class="row center-vertical-align space-between button" matRipple [matRippleColor]="rippleColor"
             (click)="onNavigate(sprint.id)">
-            <h6>{{i+1}}</h6>
-            <h6>{{sprint.name}}</h6>
+            <div class="row">
+                <h6>{{i+1}}.</h6>
+                <h6>{{sprint.name}}</h6>
+            </div>
+            <span class="body-1">{{sprint.status}}</span>
         </button>
 
         <div class="column" *ngIf="!sprints.length">
