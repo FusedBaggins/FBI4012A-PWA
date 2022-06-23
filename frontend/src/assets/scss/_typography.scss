@@ -47,12 +47,14 @@ h3,
 h4,
 h5,
 h6,
-input.mat-input-element,
-.subtitle-1,
-.subtitle-2,
 .body-1,
 .body-2,
-.button {
+.button,
+.subtitle-1,
+.subtitle-2,
+.mat-dialog-content,
+input.mat-input-element,
+input.mat-date-range-input-inner {
     color: colors.$font-color;
 }
 
@@ -90,4 +92,8 @@ h6 {
 .button {
     font: 0.875rem roboto-medium;
     text-transform: capitalize;
+}
+
+.mat-dialog-content{
+    font-family: roboto-regular;
 }
