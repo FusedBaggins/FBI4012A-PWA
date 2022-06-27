@@ -6,6 +6,7 @@
             <input matInput formControlName="name" autocomplete="off">
         </mat-form-field>
         <button mat-button type="button" color="warn" *ngIf="update" (click)="onDelete()">Remover</button>
+        <div class="row fill"></div>
     </div>
     <button mat-fab type="submit" color="primary" class="custom-fab-button button">
         <mat-icon [svgIcon]="icon"></mat-icon>
