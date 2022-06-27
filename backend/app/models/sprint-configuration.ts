@@ -18,8 +18,11 @@ SprintConfiguration.init(
     {
         name: Sequelize.STRING,
         burdownMax: Sequelize.INTEGER,
+        burdownGoal: Sequelize.INTEGER,
         escapedDefectsMax: Sequelize.INTEGER,
+        escapedDefectsGoal: Sequelize.INTEGER,
         feedbackMax: Sequelize.INTEGER,
+        feedbackGoal: Sequelize.INTEGER
     },
     { sequelize: database.connection, freezeTableName: true }
 );
