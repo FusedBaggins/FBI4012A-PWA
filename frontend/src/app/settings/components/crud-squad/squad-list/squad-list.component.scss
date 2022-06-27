@@ -1,0 +1,42 @@
+@use "sass:map";
+@use "/src/assets/scss/colors" as colors;
+@use "/src/assets/scss/grid" as responsivity;
+
+.button {
+    background-color: map-get($map: colors.$elevations, $key: 02dp);
+    border-radius: 8px;
+}
+
+@include responsivity.grid("Handset") {
+    .content {
+        .button {
+            padding: 16px;
+            margin: 6px 0;
+
+            h6 + h6 {
+                padding-left: 8px;
+            }
+        }
+
+        .button:first-child {
+            margin-top: 0;
+        }
+
+        .button:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .fill{
+            height: 64px;
+        }
+    }
+}
+
+@include responsivity.grid("Tablet") {
+}
+
+@include responsivity.grid("TabletLandscape") {
+}
+
+@include responsivity.grid("WebLandscape") {
+}

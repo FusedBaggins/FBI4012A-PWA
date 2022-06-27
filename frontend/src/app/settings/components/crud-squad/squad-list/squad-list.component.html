@@ -1,18 +1,21 @@
-<app-header title="squad"></app-header>
+<app-header title="Squad"></app-header>
 
-<div class="column default-margin content">
-    <ng-container *ngIf="squads$ | async as squads">
-        <button *ngFor="let squad of squads; index as i" class="row button" matRipple [matRippleColor]="rippleColor"
-            (click)="onNavigate(squad.id)">
-            <h6>{{i+1}}</h6>
-            <h6>{{squad.name}}</h6>
-        </button>
+<div class="column space-between default-margin content">
+    <div class="column">
+        <ng-container *ngIf="squads$ | async as squads">
+            <button *ngFor="let squad of squads; index as i" class="row button" matRipple [matRippleColor]="rippleColor"
+                (click)="onNavigate(squad.id)">
+                <h6>{{i+1}}.</h6>
+                <h6>{{squad.name}}</h6>
+            </button>
 
-        <div class="column" *ngIf="!squads.length">
-            <h6>Oooops!</h6>
-            <span class="subtitle-1">Não há nada para mostrar aqui :( </span>
-        </div>
-    </ng-container>
+            <div class="column" *ngIf="!squads.length">
+                <h6>Oooops!</h6>
+                <span class="subtitle-1">Não há nada para mostrar aqui :( </span>
+            </div>
+            <div class="row fill"></div>
+        </ng-container>
+    </div>
     <button mat-fab type="button" color="primary" class="custom-fab-button" (click)="onNavigate(-1)">
         <mat-icon svgIcon="add"></mat-icon>
     </button>

@@ -1,10 +1,14 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './app-routing.module';
+// Angular Material
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+// Local
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +20,8 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
 
     AppRoutingModule,
+
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

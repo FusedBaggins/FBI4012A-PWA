@@ -8,9 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatNativeDateModule, MatOptionModule, MatRippleModule } from '@angular/material/core';
 
 // Local
@@ -48,11 +48,10 @@ import { SprintSettingsDetailComponent } from './components/crud-sprint-settings
     MatSelectModule,
     MatButtonModule,
     MatRippleModule,
-    MatSnackBarModule,
     MatFormFieldModule,
     MatNativeDateModule,
     MatDatepickerModule,
-
+    MatAutocompleteModule,
     // Local
     UtilsModule,
     SettingsRoutingModule

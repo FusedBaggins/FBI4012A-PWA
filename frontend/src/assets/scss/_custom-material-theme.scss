@@ -51,7 +51,8 @@ $default-theme: mat.define-dark-theme(
   height: 24px !important;
 }
 
-.mat-standard-chip .mat-chip-remove, .mat-standard-chip .mat-chip-trailing-icon{
+.mat-standard-chip .mat-chip-remove,
+.mat-standard-chip .mat-chip-trailing-icon {
   font-size: 24px;
 }
 
@@ -60,7 +61,7 @@ $default-theme: mat.define-dark-theme(
   height: 64px;
   border-radius: 24px;
 
-  position: fixed;
+  position: sticky;
 
   .mat-button-wrapper {
     padding: 0;

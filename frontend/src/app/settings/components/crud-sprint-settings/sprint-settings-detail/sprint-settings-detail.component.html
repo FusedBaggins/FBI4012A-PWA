@@ -1,25 +1,49 @@
-<div class="column center-horizontal-align default-margin action-header">
-    <h4>Configuração de Sprint</h4>
-    <span class="body-1">Criar, alterar e remover configurações.
-    </span>
-</div>
+<app-header title="Pontuações"></app-header>
 <form class="column default-margin content" [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="fill">
         <mat-label>Nome</mat-label>
         <input matInput formControlName="name" autocomplete="off">
     </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Peso burndown</mat-label>
-        <input matInput formControlName="burdownMax" autocomplete="off">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Peso escaped defects</mat-label>
-        <input matInput formControlName="escapedDefectsMax" autocomplete="off">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Peso satisfação do cliente</mat-label>
-        <input matInput formControlName="feedbackMax" autocomplete="off">
-    </mat-form-field>
+    <div class="column group">
+        <h6>Burdown</h6>
+        <div class="row no-wrap inline-fields">
+            <mat-form-field appearance="fill">
+                <mat-label>Peso</mat-label>
+                <input matInput formControlName="burdownMax" type="number" autocomplete="off">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Meta</mat-label>
+                <input matInput formControlName="burdownGoal" type="number" autocomplete="off">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="column group">
+        <h6>Escaped Defects</h6>
+        <div class="row no-wrap inline-fields">
+            <mat-form-field appearance="fill">
+                <mat-label>Peso</mat-label>
+                <input matInput formControlName="escapedDefectsMax" type="number" autocomplete="off">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Meta</mat-label>
+                <input matInput formControlName="escapedDefectsGoal" type="number" autocomplete="off">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="column group">
+        <h6>Satisfação do cliente</h6>
+        <div class="row no-wrap inline-fields">
+            <mat-form-field appearance="fill">
+                <mat-label>Peso</mat-label>
+                <input matInput formControlName="feedbackMax" type="number" autocomplete="off">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Meta</mat-label>
+                <input matInput formControlName="feedbackGoal" type="number" autocomplete="off">
+            </mat-form-field>
+        </div>
+    </div>
+    <button mat-button type="button" class="delete-button" color="warn" *ngIf="update" (click)="onDelete()">Remover</button>
     <button mat-fab type="submit" color="primary" class="custom-fab-button button">
         <mat-icon [svgIcon]="icon"></mat-icon>
     </button>

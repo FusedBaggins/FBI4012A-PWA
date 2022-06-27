@@ -4,9 +4,7 @@
 
 
 @include responsivity.grid("Handset") {
-    .content {
-        padding-top: 32px;
-    }
+    
 }
 
 @include responsivity.grid("Tablet") {

@@ -24,8 +24,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     MatIconModule,
     MatButtonModule,
     MatRippleModule,
-    MatDialogModule,
-
+    MatDialogModule
   ],
   exports: [
     HeaderComponent,

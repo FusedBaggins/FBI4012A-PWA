@@ -4,6 +4,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Angular Material
+import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 
@@ -11,8 +12,11 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { of, Subject, switchMap, takeUntil } from 'rxjs';
 
 // Local
-import { SprintSettingsService } from 'src/app/settings/services/sprint-settings.service';
 import { SprintSetting } from 'src/app/settings/interfaces/sprint-setting';
+import { ConfirmationDialog } from 'src/app/utils/interfaces/confirmation-dialog';
+import { SnackbarHandlerService } from 'src/app/utils/services/snackbar-handler.service';
+import { SprintSettingsService } from 'src/app/settings/services/sprint-settings.service';
+import { ConfirmationDialogComponent } from 'src/app/utils/components/confirmation-dialog/confirmation-dialog.component';
 
 
 @Component({
@@ -24,35 +28,93 @@ export class SprintSettingsDetailComponent implements OnInit, OnDestroy {
 
   icon: string;
   form: FormGroup;
+  update!: boolean;
 
   private _isDestroyed$: Subject<void>;
+  private _dialogSubscription$: Subject<void>;
+  private _snackBarSubscrition$: Subject<void>;
   private _createOrUpdateSubscription$: Subject<void>;
 
   constructor(
     private _router: Router,
+    private _dialog: MatDialog,
     private _sanitizer: DomSanitizer,
     private _formBuilder: FormBuilder,
     private _iconRegistry: MatIconRegistry,
     private _activatedRoute: ActivatedRoute,
-    private _sprintSettingsService: SprintSettingsService
+    private _sprintSettingsService: SprintSettingsService,
+    private _snackBarHandlerService: SnackbarHandlerService
   ) {
     this.form = this._formBuilder.group({
       id: [],
       name: [null, [Validators.required]],
       burdownMax: [null, [Validators.required]],
+      burdownGoal: [null, [Validators.required]],
       escapedDefectsMax: [null, [Validators.required]],
+      escapedDefectsGoal: [null, [Validators.required]],
       feedbackMax: [null, [Validators.required]],
+      feedbackGoal: [null, [Validators.required]],
     });
 
     this.icon = 'add';
     this._sanitizeIcons();
     this._isDestroyed$ = new Subject();
+    this._dialogSubscription$ = new Subject();
+    this._snackBarSubscrition$ = new Subject();
     this._createOrUpdateSubscription$ = new Subject();
   }
 
   private _sanitizeIcons(): void {
     this._iconRegistry.addSvgIcon('add', this._sanitizer.bypassSecurityTrustResourceUrl('assets/icons/add.svg'));
     this._iconRegistry.addSvgIcon('edit', this._sanitizer.bypassSecurityTrustResourceUrl('assets/icons/edit.svg'));
+  }
+
+  private _onRequestError(error: HttpErrorResponse): void {
+    let message: string;
+    message = (error.status === 404) ? 'Oops! Pontuação não encontrada' : 'Ooops! Houve um erro desconhecido';
+
+    this._snackBarHandlerService.openSnackBar(
+      this._snackBarSubscrition$,
+      message,
+      'OK',
+      ['settings', 'new', 'sprint-settings']
+    );
+  }
+
+  private _onRequestSuccess(message: string, navigateTo?: string[]): void {
+    this._snackBarHandlerService.openSnackBar(
+      this._snackBarSubscrition$,
+      message,
+      'ok',
+      navigateTo
+    );
+  }
+
+  onDelete(): void {
+    const dialogData: ConfirmationDialog = {
+      title: 'Remover',
+      description: `Você deseja excluir "${this.form.get('name')?.value}"?`,
+    }
+
+    this._dialogSubscription$.next();
+    const dialog = this._dialog.open(ConfirmationDialogComponent, { data: dialogData, width: '80%' });
+    dialog.afterClosed().pipe(
+      takeUntil(this._dialogSubscription$),
+      switchMap(value => {
+        if (value) {
+          const id: number = this.form.get('id')?.value;
+          return this._sprintSettingsService.deleteSprintSetting(id);
+        }
+        return of();
+      })
+    ).subscribe({
+      next: () => {
+        this._onRequestSuccess('Pontuação removida', ['settings', 'sprint-settings']);
+      },
+      error: (error: HttpErrorResponse) => {
+        this._onRequestError(error);
+      }
+    });
   }
 
   onSubmit(): void {
@@ -74,9 +136,9 @@ export class SprintSettingsDetailComponent implements OnInit, OnDestroy {
       ).subscribe({
         next: (value) => {
           if (update) return;
-          this._router.navigate(['settings','sprint-settings', value.id]);
+          this._router.navigate(['settings', 'sprint-settings', value.id]);
         },
-        error: (error: HttpErrorResponse) => { }
+        error: (error: HttpErrorResponse) => this._onRequestError(error)
       });
     }
   }
@@ -92,10 +154,14 @@ export class SprintSettingsDetailComponent implements OnInit, OnDestroy {
       next: (value) => {
         if (value) {
           this.icon = 'edit';
+          this.update = true;
           this.form.patchValue(value);
+          return;
         }
+
+        this.update = false;
       },
-      error: (error) => console.log(error)
+      error: (error: HttpErrorResponse) => this._onRequestError(error)
     });
   }
 
@@ -103,6 +169,10 @@ export class SprintSettingsDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._isDestroyed$.next();
     this._isDestroyed$.complete();
+    this._snackBarSubscrition$.next();
+    this._snackBarSubscrition$.complete();
+    this._dialogSubscription$.next();
+    this._dialogSubscription$.complete();
     this._createOrUpdateSubscription$.next();
     this._createOrUpdateSubscription$.complete();
   }

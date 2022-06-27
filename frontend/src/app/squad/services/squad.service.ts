@@ -21,9 +21,9 @@ export class SquadService implements OnDestroy {
     this._squadsSubscription$ = new Subject();
     this._errors$ = new BehaviorSubject(undefined);
     this._squads$ = new BehaviorSubject<Squad[]>([]);
-   }
+  }
 
-   squadsIsEmpty(): boolean {
+  squadsIsEmpty(): boolean {
     return !!(this._squads$.value);
   }
 
@@ -41,7 +41,7 @@ export class SquadService implements OnDestroy {
     return this._errors$.asObservable();
   }
 
-  getSquads():Observable<Squad[]>{
+  getSquads(): Observable<Squad[]> {
     return this._squads$.asObservable();
   }
 
@@ -55,6 +55,10 @@ export class SquadService implements OnDestroy {
 
   patchSquad(id: number, obj: any): Observable<any> {
     return this._http.patch(`${environment.apiEndpoint}/squad/${id}`, obj);
+  }
+
+  deleteSquad(id: number): Observable<any> {
+    return this._http.delete(`${environment.apiEndpoint}/squad/${id}`);
   }
 
   ngOnDestroy(): void {

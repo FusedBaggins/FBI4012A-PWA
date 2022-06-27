@@ -2,8 +2,8 @@
 
 <div class="column default-margin content">
     <ng-container *ngIf="sprints$ | async as sprints">
-        <button *ngFor="let sprint of sprints; index as i" class="row center-vertical-align space-between button" matRipple [matRippleColor]="rippleColor"
-            (click)="onNavigate(sprint.id)">
+        <button *ngFor="let sprint of sprints; index as i" class="row center-vertical-align space-between button"
+            matRipple [matRippleColor]="rippleColor" (click)="onNavigate(sprint.id)">
             <div class="row">
                 <h6>{{i+1}}.</h6>
                 <h6>{{sprint.name}}</h6>
@@ -16,7 +16,8 @@
             <span class="subtitle-1">Não há nada para mostrar aqui :( </span>
         </div>
     </ng-container>
-    <button mat-fab type="button" color="primary" class="custom-fab-button" (click)="onNavigate(-1)">
-        <mat-icon svgIcon="add"></mat-icon>
-    </button>
+
 </div>
+<button mat-fab type="button" color="primary" class="custom-fab-button" (click)="onNavigate(-1)">
+    <mat-icon svgIcon="add"></mat-icon>
+</button>

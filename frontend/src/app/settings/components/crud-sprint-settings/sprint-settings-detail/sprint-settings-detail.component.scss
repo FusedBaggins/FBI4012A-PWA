@@ -2,10 +2,32 @@
 @use "/src/assets/scss/colors" as colors;
 @use "/src/assets/scss/grid" as responsivity;
 
-
 @include responsivity.grid("Handset") {
     .content {
-        padding-top: 32px;
+
+        h6 {
+            padding: 0 0 16px 0;
+        }
+
+        .group {
+            .inline-fields > * {
+                width: calc(50% - 2px);
+                box-sizing: border-box;
+                margin: 0 2px;
+            }
+
+            .inline-fields > *:first-of-type {
+                margin-left: 0;
+            }
+
+            .inline-fields > *:last-of-type {
+                margin-right: 0;
+            }
+        }
+
+        .delete-button {
+            padding: 0 0 48px 0;
+        }
     }
 }
 

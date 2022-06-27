@@ -1,13 +1,12 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Angular Material
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 // Third-party
@@ -19,8 +18,8 @@ import { rippleColor } from 'src/app/utils/constants/ripple-color';
 import { SquadService } from 'src/app/squad/services/squad.service';
 import { SprintService } from 'src/app/sprint/services/sprint.service';
 import { SprintSetting } from 'src/app/settings/interfaces/sprint-setting';
-import { snackbarDuration } from 'src/app/utils/constants/snackbar-duration';
 import { ConfirmationDialog } from 'src/app/utils/interfaces/confirmation-dialog';
+import { SnackbarHandlerService } from 'src/app/utils/services/snackbar-handler.service';
 import { SprintSettingsService } from 'src/app/settings/services/sprint-settings.service';
 import { ConfirmationDialogComponent } from 'src/app/utils/components/confirmation-dialog/confirmation-dialog.component';
 
@@ -47,16 +46,15 @@ export class SprintDetailComponent implements OnInit {
   private _sprintChangeSubscription$: Subject<void>;
 
   constructor(
-    private _router: Router,
     private _dialog: MatDialog,
-    private _snackbar: MatSnackBar,
     private _sanitizer: DomSanitizer,
     private _formBuilder: FormBuilder,
     private _squadService: SquadService,
     private _sprintService: SprintService,
     private _iconRegistry: MatIconRegistry,
     private _activatedRoute: ActivatedRoute,
-    private _sprintSettingsService: SprintSettingsService
+    private _sprintSettingsService: SprintSettingsService,
+    private _snackBarHandlerService: SnackbarHandlerService
   ) {
 
     this.form = this._formBuilder.group({
@@ -93,23 +91,25 @@ export class SprintDetailComponent implements OnInit {
     );
   }
 
-  private _errorRequestHandler(error: HttpErrorResponse): void {
-    let snackbar;
-    let config: MatSnackBarConfig = { duration: snackbarDuration };
+  private _onRequestError(error: HttpErrorResponse): void {
+    let message: string;
+    message = (error.status === 404) ? 'Oops! Sprint não encontrada' : 'Ooops! Houve um erro desconhecido';
 
-    this._snackbarSubscription$.next();
+    this._snackBarHandlerService.openSnackBar(
+      this._snackbarSubscription$,
+      message,
+      'OK',
+      ['settings', 'new', 'sprint']
+    );
+  }
 
-    if (error.status === 404) {
-      snackbar = this._snackbar.open('Oops! Sprint não encontrada', 'OK', config);
-    } else {
-      snackbar = this._snackbar.open('Ooops! Houve um erro desconhecido.', 'OK', config);
-    }
-    snackbar.afterDismissed().pipe(
-      delay(100),
-      takeUntil(this._snackbarSubscription$)
-    ).subscribe(() => {
-      this._router.navigate(['settings', 'new', 'sprint'])
-    });
+  private _onRequestSuccess(message: string, navigateTo?: string[]): void {
+    this._snackBarHandlerService.openSnackBar(
+      this._snackbarSubscription$,
+      message,
+      'ok',
+      navigateTo
+    );
   }
 
   onDelete(): void {
@@ -119,7 +119,7 @@ export class SprintDetailComponent implements OnInit {
     }
 
     this._dialogSubscription$.next();
-    const dialog = this._dialog.open(ConfirmationDialogComponent, { data: dialogData, width:'80%' });
+    const dialog = this._dialog.open(ConfirmationDialogComponent, { data: dialogData, width: '80%' });
     dialog.afterClosed().pipe(
       takeUntil(this._dialogSubscription$),
       switchMap(value => {
@@ -131,17 +131,10 @@ export class SprintDetailComponent implements OnInit {
       })
     ).subscribe({
       next: () => {
-        const snackbar = this._snackbar.open('Sprint removida', 'OK', { duration: snackbarDuration });
-        this._snackbarSubscription$.next();
-
-        snackbar.afterDismissed().pipe(
-          takeUntil(this._sprintChangeSubscription$)
-        ).subscribe(() => {
-          this._router.navigate(['settings', 'sprint']);
-        })
+        this._onRequestSuccess('Sprint removida', ['settings', 'sprint']);
       },
       error: (error: HttpErrorResponse) => {
-        this._errorRequestHandler(error);
+        this._onRequestError(error);
       }
     });
   }
@@ -165,18 +158,19 @@ export class SprintDetailComponent implements OnInit {
       ).subscribe({
         next: () => {
           this._sprintService.requestSprints({});
+          let message: string;
+
+          message = (update) ? 'Sprint atualizada' : 'Sprint adicionada';
+          this._onRequestSuccess(message);
 
           if (update) {
-            this._snackbar.open('Sprint atualizada', 'OK', { duration: snackbarDuration });
             return;
           };
 
-          this._snackbar.open('Sprint adicionada', 'OK', { duration: snackbarDuration });
           this.form.reset();
-
         },
         error: (error: HttpErrorResponse) => {
-          this._errorRequestHandler(error);
+          this._onRequestError(error)
         }
       })
     }
@@ -222,7 +216,7 @@ export class SprintDetailComponent implements OnInit {
         return;
       },
       error: (error: HttpErrorResponse) => {
-        this._errorRequestHandler(error);
+        this._onRequestError(error);
       }
     });
 

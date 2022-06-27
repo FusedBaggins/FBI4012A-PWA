@@ -57,6 +57,10 @@ export class SprintSettingsService implements OnDestroy {
     return this._http.post<any>(`${environment.apiEndpoint}/sprint-configuration/`, obj);
   }
 
+  deleteSprintSetting(id: number): Observable<any> {
+    return this._http.delete<any>(`${environment.apiEndpoint}/sprint-configuration/${id}`);
+  }
+
   ngOnDestroy(): void {
     this._sprintSettingsSubscription$.next();
     this._sprintSettingsSubscription$.complete();

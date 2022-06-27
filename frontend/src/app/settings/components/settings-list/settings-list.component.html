@@ -1,9 +1,4 @@
-<div class="column center-horizontal-align default-margin action-header">
-    <h4>Ações</h4>
-    <span class="body-1">Criar, alterar e remover entidades.
-    </span>
-</div>
-
+<app-header title="Ações"></app-header>
 <div class="column default-margin content">
     <button class="button" matRipple [matRippleColor]="rippleColor" *ngFor="let button of buttons" (click)="onNavigate(button.navigateTo)">{{button.label}}</button>
 </div>

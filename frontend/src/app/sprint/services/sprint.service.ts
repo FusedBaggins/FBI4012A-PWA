@@ -33,6 +33,10 @@ export class SprintService implements OnDestroy {
       });
   }
 
+  sprintsIsEmpty(): boolean {
+    return !!(this._sprints$.value);
+  }
+
   postSprint(obj: Sprint): Observable<any> {
     return this._http.post<Sprint>(`${environment.apiEndpoint}/sprint/`, obj)
   }
@@ -41,8 +45,16 @@ export class SprintService implements OnDestroy {
     return this._http.patch<Sprint>(`${environment.apiEndpoint}/sprint/${id}/`, obj)
   }
 
+  deleteSprint(id:number):Observable<any>{
+    return this._http.delete(`${environment.apiEndpoint}/sprint/${id}/`);
+  }
+
   getSprints(): Observable<Sprint[]> {
     return this._sprints$.asObservable();
+  }
+
+  getSprint(id:number): Observable<Sprint>{
+   return this._http.get<Sprint>(`${environment.apiEndpoint}/sprint/${id}/`);
   }
 
   getError(): Observable<any> {

@@ -1,10 +1,12 @@
-<app-header title="squad"></app-header>
-<!--  (ngSubmit)="onSubmit()" -->
-<form class="column default-margin content" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill">
-        <mat-label>Nome</mat-label>
-        <input matInput formControlName="name" autocomplete="off">
-    </mat-form-field>
+<app-header title="Squad"></app-header>
+<form class="column space-between default-margin content" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="column">
+        <mat-form-field appearance="fill">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="name" autocomplete="off">
+        </mat-form-field>
+        <button mat-button type="button" color="warn" *ngIf="update" (click)="onDelete()">Remover</button>
+    </div>
     <button mat-fab type="submit" color="primary" class="custom-fab-button button">
         <mat-icon [svgIcon]="icon"></mat-icon>
     </button>
