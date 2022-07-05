@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 // Angular Material
 
@@ -8,11 +9,14 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 
+// Third-party
+import { Observable, Subject, takeUntil } from 'rxjs';
+
+
 // Local
+import { SprintService } from '../../services/sprint.service';
 import { rippleColor } from 'src/app/utils/constants/ripple-color';
 import { SprintFilterComponent } from '../sprint-filter/sprint-filter.component';
-import { SprintService } from '../../services/sprint.service';
-import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-sprint-list',
@@ -29,6 +33,7 @@ export class SprintListComponent implements OnInit, OnDestroy {
   private _isDestroyed$: Subject<void>;
 
   constructor(
+    private _router: Router,
     private _snackBar: MatSnackBar,
     private _sanitizer: DomSanitizer,
     private _formBuilder: FormBuilder,
@@ -55,6 +60,10 @@ export class SprintListComponent implements OnInit, OnDestroy {
 
   onFilter(): void {
     this._bottomSheet.open(SprintFilterComponent, { panelClass: ['custom-bottom-sheet-container'], data: { form: this.form } });
+  }
+
+  onNavigate(to: number): void {
+    this._router.navigate(['sprint', to])
   }
 
   ngOnInit(): void {

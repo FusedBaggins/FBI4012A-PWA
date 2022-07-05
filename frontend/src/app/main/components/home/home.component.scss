@@ -2,13 +2,27 @@
 @use "/src/assets/scss/colors" as colors;
 @use "/src/assets/scss/grid" as responsivity;
 
-.actions{
+.actions {
     box-sizing: border-box;
 }
 
 .button {
     border-radius: 12px;
     background-color: map-get($map: colors.$elevations, $key: 02dp);
+}
+
+// Fallback styles
+.title {
+    padding: 0 0 32px 0;
+}
+
+.button {
+    width: 25%;
+    padding: 32px 0;
+
+    span {
+        padding: 8px 0 0 0;
+    }
 }
 
 @include responsivity.grid("Handset") {
@@ -24,6 +38,10 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+
+        .row{
+            width: 48px;
+        }
     }
 
     .button + .button {
@@ -40,12 +58,7 @@
         width: 35%;
         padding: 32px 0;
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        span{
+        span {
             padding: 8px 0 0 0;
         }
     }
@@ -56,7 +69,19 @@
 }
 
 @include responsivity.grid("TabletLandscape") {
+    .button {
+        width: 25%;
+    }
 }
 
-@include responsivity.grid("WebLandscape") {
+@include responsivity.grid("Web") {
+    .button + .button {
+        margin-left: 16px;
+    }
+}
+
+@include responsivity.grid("XLarge") {
+    .button {
+        width: 10%;
+    }
 }

@@ -1,1 +1,32 @@
-<p>sprint-detail works!</p>
+<div class="column center-horizontal-align default-margin dashboard action-header">
+    <h4>Dashboard</h4>
+    <h6>Implementar dashboard</h6>
+</div>
+<div class="column squads">
+    <div class="row title center-vertical-align space-between default-margin">
+        <h4>Squads</h4>
+    </div>
+    <!-- <mat-chip-list class="row no-wrap sort">
+        <mat-chip class="button">Nome</mat-chip>
+        <mat-chip class="button">Status</mat-chip>
+        <mat-chip class="button">Data inicial</mat-chip>
+        <mat-chip class="button">Data final</mat-chip>
+    </mat-chip-list> -->
+    <div class="column content default-margin">
+        <ng-container *ngIf="squads$ | async as squads">
+            <button *ngFor="let squad of squads" class="column squad" matRipple [matRippleColor]="rippleColor">
+                <span class="body-1">{{squad.name}}</span>
+                <!-- <ng-container [ngSwitch]="sprint.status">
+                    <span class="subtitle-2" *ngSwitchCase="'Em andamento'">{{sprint.status}} até {{sprint.endDate | date:'dd/MM/YYY'}}</span>
+                    <span class="subtitle-2" *ngSwitchCase="'Encerrada'">{{sprint.status}} em {{sprint.endDate | date:'dd/MM/YYY'}}</span>
+                    <span class="subtitle-2" *ngSwitchCase="'Não iniciada'">Inicia em {{sprint.startDate | date:'dd/MM/YYY'}}</span>
+                </ng-container> -->
+            </button>
+
+            <div class="column" *ngIf="!squads.length">
+                <h6>Oooops!</h6>
+                <span class="subtitle-1">Não há nada para mostrar aqui :( </span>
+            </div>
+        </ng-container>
+    </div>
+</div>

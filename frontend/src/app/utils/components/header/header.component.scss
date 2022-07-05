@@ -2,27 +2,55 @@
 @use "/src/assets/scss/colors" as colors;
 @use "/src/assets/scss/grid" as responsivity;
 
-.content{
-    height: 60%;
+.content {
+    background-color: map-get($map: colors.$elevations, $key: 02dp);
 }
 
 @include responsivity.grid("Handset") {
-    .title {
-        padding: 0 0 0 16px;
+    .content {
+        height: 60%;
 
-        .body-1{
-            padding: 8px 0 0 0 ;
+        .title {
+            padding: 0 0 0 16px;
+
+            .body-1 {
+                padding: 8px 0 0 0;
+            }
         }
     }
-
-
 }
 
 @include responsivity.grid("Tablet") {
+    .content {
+        height: 40%;
+
+        .title {
+            padding: 0 0 0 16px;
+
+            .body-1 {
+                padding: 8px 0 0 0;
+            }
+        }
+    }
 }
 
 @include responsivity.grid("TabletLandscape") {
+    .content {
+        height: 64px;
+    }
+
+    .title {
+        padding-top: 32px;
+        padding-bottom: 16px;
+    }
 }
 
-@include responsivity.grid("WebLandscape") {
+@include responsivity.grid("Web") {
+    .title {
+        padding-top: 32px;
+        padding-bottom: 16px;
+    }
+}
+
+@include responsivity.grid("XLarge") {
 }

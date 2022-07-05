@@ -4,13 +4,15 @@
         <h6>Para onde você quer ir?</h6>
     </div>
     <div class="actions no-wrap" [ngClass]="actionsDirection">
-        <button matRipple [matRippleColor]="rippleColor" class="button" (click)="onNavigate('sprint')">
+        <button matRipple [matRippleColor]="rippleColor" class="column center-vertical-align center-horizontal-align button" (click)="onNavigate('sprint')">
             <mat-icon svgIcon="insights"></mat-icon>
             <span>Ranking</span>
+            <div class="row"></div>
         </button>
-        <button matRipple [matRippleColor]="rippleColor" class="button" (click)="onNavigate('settings')">
+        <button matRipple [matRippleColor]="rippleColor" class="column center-vertical-align center-horizontal-align button" (click)="onNavigate('settings')">
             <mat-icon svgIcon="settings"></mat-icon>
             <span>Configurações</span>
+            <div class="row"></div>
         </button>
     </div>
 </div>

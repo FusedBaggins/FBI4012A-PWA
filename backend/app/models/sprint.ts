@@ -8,6 +8,7 @@ class Sprint extends Model {
     isActive!: boolean;
     startDate!: Date;
     endDate!: Date;
+    squads!: any;
 }
 
 Sprint.init(

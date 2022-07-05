@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     this._breakpoints = [
       Breakpoints.Handset,
       Breakpoints.Tablet,
-      Breakpoints.WebLandscape
+      Breakpoints.Web
     ];
     this._isDestroyed = new Subject();
     this.rippleColor = rippleColor;

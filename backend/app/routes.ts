@@ -13,7 +13,7 @@ routes.get("/sprint-configuration", SprintConfigurationController.list);
 
 routes.get("/squad/:id", SquadController.detail);
 routes.get("/sprint/:id", SprintController.detail);
-routes.get("/ranking/:id", RankingController.detail);
+routes.get("/sprint/:id/ranking", RankingController.list);
 routes.get("/sprint-configuration/:id", SprintConfigurationController.detail);
 
 routes.post("/squad", SquadController.create);

@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 
 // Third-party
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subject } from 'rxjs';
 
 // Local
 import { SprintFilter } from '../interfaces/sprint-filter';
@@ -45,7 +45,7 @@ export class SprintService implements OnDestroy {
     return this._http.patch<Sprint>(`${environment.apiEndpoint}/sprint/${id}/`, obj)
   }
 
-  deleteSprint(id:number):Observable<any>{
+  deleteSprint(id: number): Observable<any> {
     return this._http.delete(`${environment.apiEndpoint}/sprint/${id}/`);
   }
 
@@ -53,8 +53,25 @@ export class SprintService implements OnDestroy {
     return this._sprints$.asObservable();
   }
 
-  getSprint(id:number): Observable<Sprint>{
-   return this._http.get<Sprint>(`${environment.apiEndpoint}/sprint/${id}/`);
+  getSprint(id: number): Observable<Sprint> {
+    return this._http.get<Sprint>(`${environment.apiEndpoint}/sprint/${id}/`);
+  }
+
+  getRanking(sprintId: number): Observable<any> {
+    return this._http.get(`${environment.apiEndpoint}/sprint/${sprintId}/ranking`).pipe(
+      map((squads: any) => {
+        squads.map((squad: any) => {
+          let s: any = {
+            name: squad.name,
+            createdAt: squad.createdAt,
+            
+          };
+
+          return squad;
+        })
+        return squads;
+      })
+    );
   }
 
   getError(): Observable<any> {

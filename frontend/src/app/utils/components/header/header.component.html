@@ -1,10 +1,24 @@
-
-<div class="row no-wrap center-vertical-align default-margin full-width action-header">
-    <button matRipple [matRippleColor]="rippleColor" class="button icon-button" (click)="onGoBack()">
-        <mat-icon svgIcon="arrow_back"></mat-icon>
-    </button>
-    <div class="column title">
-        <h4 class="row center-vertical-align">{{title}}</h4>
-        <span class="body-1">{{subtitle}}</span>
+<ng-container *ngIf="layout === 'mobile'">
+    <div class="row no-wrap center-vertical-align default-margin full-width content">
+        <button matRipple [matRippleColor]="rippleColor" class="button icon-button" (click)="onGoBack()">
+            <mat-icon svgIcon="arrow_back"></mat-icon>
+        </button>
+        <div class="column title">
+            <h4 class="row center-vertical-align">{{title}}</h4>
+            <!-- <span class="body-1">{{subtitle}}</span> -->
+        </div>
     </div>
-</div>
+</ng-container>
+<ng-container *ngIf="layout === 'desktop'">
+    <div class="row space-between default-margin full-width content">
+        <button matRipple [matRippleColor]="rippleColor" class="button icon-button" (click)="onGoBack()">
+            <mat-icon svgIcon="arrow_back"></mat-icon>
+        </button>
+        <h5 class="row area center-horizontal-align center-vertical-align">Title</h5>
+        <div class="fill"></div>
+    </div>
+    <!-- <div class="column default-margin title">
+        <h4>{{title}}</h4>
+        <h6> {{subtitle}}</h6>
+    </div> -->
+</ng-container>

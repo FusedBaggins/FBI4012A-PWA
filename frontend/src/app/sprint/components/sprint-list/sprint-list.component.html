@@ -17,9 +17,14 @@
     </mat-chip-list>
     <div class="column content default-margin">
         <ng-container *ngIf="sprints$ | async as sprints">
-            <button *ngFor="let sprint of sprints" class="column sprint" matRipple [matRippleColor]="rippleColor">
-                <span class="body-1">Teste</span>
-                <span class="subtitle-2">teste</span>
+            <button *ngFor="let sprint of sprints" class="column sprint" (click)="onNavigate(sprint.id)" matRipple
+                [matRippleColor]="rippleColor">
+                <span class="body-1">{{sprint.name}}</span>
+                <ng-container [ngSwitch]="sprint.status">
+                    <span class="subtitle-2" *ngSwitchCase="'Em andamento'">{{sprint.status}} até {{sprint.endDate | date:'dd/MM/YYY'}}</span>
+                    <span class="subtitle-2" *ngSwitchCase="'Encerrada'">{{sprint.status}} em {{sprint.endDate | date:'dd/MM/YYY'}}</span>
+                    <span class="subtitle-2" *ngSwitchCase="'Não iniciada'">Inicia em {{sprint.startDate | date:'dd/MM/YYY'}}</span>
+                </ng-container>
             </button>
 
             <div class="column" *ngIf="!sprints.length">

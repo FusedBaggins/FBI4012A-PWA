@@ -39,9 +39,6 @@ button {
   box-sizing: border-box;
 }
 
-.action-header {
-  background-color: map-get($map: colors.$elevations, $key: 02dp);
-}
 
 @include responsivity.grid("Handset") {
   $margin: map-get(
@@ -62,15 +59,6 @@ button {
     left: 100%;
 
     //margin: 0 $margin 0 0 !important;
-  }
-
-  .error-button {
-    padding: 16px 12px;
-    margin: 16px 0 0 0;
-  }
-
-  .error-button + .error-button {
-    margin-left: 8px;
   }
 
   .action-header {
@@ -105,14 +93,6 @@ button {
     height: 65vh;
   }
 
-  .error-button {
-    padding: 16px 12px;
-    margin: 16px 0 0 0;
-  }
-
-  .error-button + .error-button {
-    margin-left: 8px;
-  }
 }
 
 @include responsivity.grid("TabletLandscape") {
@@ -123,11 +103,6 @@ button {
 
   .default-margin {
     padding: 0 $margin;
-  }
-
-  .error-button {
-    padding: 16px 12px;
-    margin: 16px 0 0 0;
   }
 }
 
@@ -140,11 +115,6 @@ button {
   .default-margin {
     padding: 0 $margin;
   }
-
-  .error-button {
-    padding: 16px 12px;
-    margin: 16px 0 0 0;
-  }
 }
 
 @include responsivity.grid("WebLandscape") {
@@ -155,11 +125,6 @@ button {
 
   .default-margin {
     padding: 0 $margin;
-  }
-
-  .error-button {
-    padding: 16px 12px;
-    margin: 16px 0 0 0;
   }
 }
 
