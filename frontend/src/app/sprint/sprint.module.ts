@@ -13,10 +13,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 
+import { UtilsModule } from '../utils/utils.module';
 import { SprintRoutingModule } from './sprint-routing.module';
 import { SprintListComponent } from './components/sprint-list/sprint-list.component';
 import { SprintFilterComponent } from './components/sprint-filter/sprint-filter.component';
 import { SprintDetailComponent } from './components/sprint-detail/sprint-detail.component';
+import { SprintUpdateRankingComponent } from './components/sprint-update-ranking/sprint-update-ranking.component';
 
 
 @NgModule({
@@ -24,6 +26,7 @@ import { SprintDetailComponent } from './components/sprint-detail/sprint-detail.
     SprintListComponent,
     SprintFilterComponent,
     SprintDetailComponent,
+    SprintUpdateRankingComponent,
   ],
   imports: [
     FormsModule,
@@ -42,7 +45,8 @@ import { SprintDetailComponent } from './components/sprint-detail/sprint-detail.
     MatDatepickerModule,
     MatBottomSheetModule,
 
-    SprintRoutingModule
+    SprintRoutingModule,
+    UtilsModule
   ]
 })
 export class SprintModule { }

@@ -1,7 +1,7 @@
 export interface SprintSetting {
     id: number,
     name: string,
-    burdownMax: number,
+    burndownMax: number,
     escapedDefectsMax: number,
     feedbackMax: number,
     createdAt: Date,

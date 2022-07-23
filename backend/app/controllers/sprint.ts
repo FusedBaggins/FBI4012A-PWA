@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import Squad from "../models/squad";
 import Sprint from "../models/sprint";
 import History from "../models/history";
+import SprintConfiguration from "../models/sprint-configuration";
 
 export default {
     async list(req: Request, res: Response): Promise<any> {
@@ -74,15 +75,6 @@ export default {
         let sprint = await Sprint.destroy({ where: { id: id } });
         if (sprint) return res.status(200).json(sprint);
 
-        return res.status(404).json({});
-    },
-    async ranking(req: Request, res: Response): Promise<any> {
-        const id: number = parseInt(req.params.id);
-        let sprint = await Sprint.findByPk(id);
-        if (sprint) {
-            let rankings = await History.findAll({ where: { sprintId: id, include: [{ model: Squad}] } })
-            return res.status(200).json(rankings);
-        }
         return res.status(404).json({});
     }
 }

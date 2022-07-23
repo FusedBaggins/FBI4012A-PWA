@@ -59,19 +59,30 @@ export class SprintService implements OnDestroy {
 
   getRanking(sprintId: number): Observable<any> {
     return this._http.get(`${environment.apiEndpoint}/sprint/${sprintId}/ranking`).pipe(
-      map((squads: any) => {
-        squads.map((squad: any) => {
-          let s: any = {
-            name: squad.name,
-            createdAt: squad.createdAt,
-            
-          };
+      map((sprint: any) => {
+        sprint.squads = sprint.squads.map((squad: any) => {
+          let burndown: number = (squad.History.burdown || 0);
+          let feedback: number = (squad.History.escapedDefects || 0);
+          let escapedDefects: number = (squad.History.feedback || 0);
 
+          squad.score = ((burndown / sprint.sprintConfiguration.burndownMax) + (feedback / sprint.sprintConfiguration.feedbackMax) + (escapedDefects / sprint.sprintConfiguration.escapedDefectsMax)) / 3;
+          squad.score *= 100;
+          squad.score = Math.round(squad.score);
+          squad.scoreGoal = ((burndown / sprint.sprintConfiguration.burndownGoal) + (feedback / sprint.sprintConfiguration.feedbackGoal) + (escapedDefects / sprint.sprintConfiguration.escapedDefectsGoal)) / 3;
+          squad.scoreGoal *= 100;
+          squad.scoreGoal = Math.round(squad.scoreGoal);
           return squad;
-        })
-        return squads;
+
+        });
+
+        sprint.squads.sort((a: any, b: any) => b.score - a.score);
+        return sprint;
       })
     );
+  }
+
+  updateRanking(sprintId: number, squadId: number, obj: any): Observable<any> {
+    return this._http.patch(`${environment.apiEndpoint}/ranking/${sprintId}/${squadId}`, obj);
   }
 
   getError(): Observable<any> {

@@ -29,16 +29,20 @@
     .content {
         padding-top: 32px;
 
-        .sprint {
+        .squad {
             padding: 16px;
             margin: 6px 0;
+
+            .position{
+                padding: 0 8px 0 0;
+            }
         }
 
-        .sprint:first-child {
+        .squad:first-child {
             margin-top: 0;
         }
 
-        .sprint:last-child {
+        .squad:last-child {
             margin-bottom: 0;
         }
     }

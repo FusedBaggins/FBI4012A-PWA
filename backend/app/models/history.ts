@@ -6,9 +6,9 @@ import database from '../database/database';
 
 class History extends Model {
     id!:number;
-    burdown!: number;
-    burdownMax!: string;
-    burdownGoal!: number;
+    burndown!: number;
+    burndownMax!: string;
+    burndownGoal!: number;
     escapedDefects!: number;
     escapedDefectsMax!: number;
     escapedDefectsGoal!: number;
@@ -20,15 +20,15 @@ class History extends Model {
 
 History.init(
     {
-        burdown: Sequelize.INTEGER,
-        burdownMax: Sequelize.INTEGER,
-        burdownGoal: Sequelize.INTEGER,
-        escapedDefects: Sequelize.INTEGER,
-        escapedDefectMax: Sequelize.INTEGER,
-        escapedDefectsGoal: Sequelize.INTEGER,
-        feedback: Sequelize.INTEGER,
-        feedbackMax: Sequelize.INTEGER,
-        feedbackGoal: Sequelize.INTEGER,
+        burndown:{ type: Sequelize.INTEGER, defaultValue: 0 },
+        burndownMax:{ type: Sequelize.INTEGER, defaultValue: 0 },
+        burndownGoal:{ type: Sequelize.INTEGER, defaultValue: 0 },
+        escapedDefects:{ type: Sequelize.INTEGER, defaultValue: 0 },
+        escapedDefectMax: { type: Sequelize.INTEGER, defaultValue: 0 },
+        escapedDefectsGoal: { type: Sequelize.INTEGER, defaultValue: 0 },
+        feedback:{ type: Sequelize.INTEGER, defaultValue: 0 },
+        feedbackMax: { type: Sequelize.INTEGER, defaultValue: 0 },
+        feedbackGoal: { type: Sequelize.INTEGER, defaultValue: 0 },
         isActive: { type: Sequelize.BOOLEAN, defaultValue: true }
     },
     { sequelize: database.connection, freezeTableName: true }

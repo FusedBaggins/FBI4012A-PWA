@@ -1,0 +1,39 @@
+@use "sass:map";
+@use "/src/assets/scss/colors" as colors;
+@use "/src/assets/scss/grid" as responsivity;
+
+.container {
+    background-color: map-get($map: colors.$elevations, $key: 02dp);
+}
+
+@include responsivity.grid("Handset") {
+    .container {
+        padding-bottom: 36px;
+    }
+
+    .header {
+        padding: 36px 0;
+        position: sticky;
+        top: 0;
+    }
+
+    .container {
+
+        .radio-group-title {
+            padding: 0 0 12px 0;
+        }
+
+        mat-radio-button {
+            padding: 2px 0;
+        }
+    }
+}
+
+@include responsivity.grid("Tablet") {
+}
+
+@include responsivity.grid("TabletLandscape") {
+}
+
+@include responsivity.grid("WebLandscape") {
+}

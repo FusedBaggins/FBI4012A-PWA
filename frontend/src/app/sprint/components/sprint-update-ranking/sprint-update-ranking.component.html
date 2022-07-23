@@ -1,0 +1,19 @@
+<div class="column default-margin container">
+    <div class="row center-horizontal-align header">
+        <h5>Pontuações</h5>
+    </div>
+    <form class="column content" [formGroup]="form">
+        <mat-form-field class="" appearance="fill">
+            <mat-label>Burdown</mat-label>
+            <input matInput placeholder="" formControlName="burndown" type="number" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field class="" appearance="fill">
+            <mat-label>Scaped defects</mat-label>
+            <input matInput placeholder="" formControlName="escapedDefects" autocomplete="off" type="number">
+        </mat-form-field>
+        <mat-form-field class="" appearance="fill">
+            <mat-label>Satisfação do cliente</mat-label>
+            <input matInput placeholder="" formControlName="feedback" autocomplete="off" type="number">
+        </mat-form-field>
+    </form>
+</div>

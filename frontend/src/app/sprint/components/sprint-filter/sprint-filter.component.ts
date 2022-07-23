@@ -32,7 +32,6 @@ export class SprintFilterComponent implements OnInit, OnDestroy {
     this.form.valueChanges.pipe(
       takeUntil(this._isDestroyed$)
     ).subscribe((filter: SprintFilter) => {
-      console.log(filter);
     });
   }
 

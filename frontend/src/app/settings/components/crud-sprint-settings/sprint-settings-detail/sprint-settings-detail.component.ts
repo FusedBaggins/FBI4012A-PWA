@@ -48,8 +48,8 @@ export class SprintSettingsDetailComponent implements OnInit, OnDestroy {
     this.form = this._formBuilder.group({
       id: [],
       name: [null, [Validators.required]],
-      burdownMax: [null, [Validators.required]],
-      burdownGoal: [null, [Validators.required]],
+      burndownMax: [null, [Validators.required]],
+      burndownGoal: [null, [Validators.required]],
       escapedDefectsMax: [null, [Validators.required]],
       escapedDefectsGoal: [null, [Validators.required]],
       feedbackMax: [null, [Validators.required]],

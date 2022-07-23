@@ -6,8 +6,8 @@ import database from '../database/database';
 class SprintConfiguration extends Model {
     id!:number;
     name!: string;
-    burdownMax!:string;
-    burdownGoal!:string;
+    burndownMax!:string;
+    burndownGoal!:string;
     escapedDefectsMax!: number;
     escapedDefectsGoal!: number;
     feedbackMax!: number;
@@ -17,8 +17,8 @@ class SprintConfiguration extends Model {
 SprintConfiguration.init(
     {
         name: Sequelize.STRING,
-        burdownMax: Sequelize.INTEGER,
-        burdownGoal: Sequelize.INTEGER,
+        burndownMax: Sequelize.INTEGER,
+        burndownGoal: Sequelize.INTEGER,
         escapedDefectsMax: Sequelize.INTEGER,
         escapedDefectsGoal: Sequelize.INTEGER,
         feedbackMax: Sequelize.INTEGER,
@@ -27,6 +27,6 @@ SprintConfiguration.init(
     { sequelize: database.connection, freezeTableName: true }
 );
 
-Sprint.belongsTo(SprintConfiguration, {foreignKey: 'sprintConfigurationId'});
+Sprint.belongsTo(SprintConfiguration, {foreignKey: 'sprintConfigurationId', as:'sprintConfiguration'});
 
 export default SprintConfiguration;

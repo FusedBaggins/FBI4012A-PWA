@@ -1,7 +1,4 @@
-<div class="column center-horizontal-align default-margin dashboard action-header">
-    <h4>Dashboard</h4>
-    <h6>Implementar dashboard</h6>
-</div>
+<app-header title="Dashboard"></app-header>
 <div class="column squads">
     <div class="row title center-vertical-align space-between default-margin">
         <h4>Squads</h4>
@@ -13,17 +10,18 @@
         <mat-chip class="button">Data final</mat-chip>
     </mat-chip-list> -->
     <div class="column content default-margin">
-        <ng-container *ngIf="squads$ | async as squads">
-            <button *ngFor="let squad of squads" class="column squad" matRipple [matRippleColor]="rippleColor">
+        <ng-container *ngIf="sprint$ | async as sprint">
+            <button *ngFor="let squad of sprint.squads; index as i"
+                class="row center-vertical-align no-wrap space-between squad" matRipple [matRippleColor]="rippleColor"
+                (click)="onUpdateRanking(squad, sprint.sprintConfiguration)">
+                <h5 class="position">{{i+1}}</h5>
                 <span class="body-1">{{squad.name}}</span>
-                <!-- <ng-container [ngSwitch]="sprint.status">
-                    <span class="subtitle-2" *ngSwitchCase="'Em andamento'">{{sprint.status}} até {{sprint.endDate | date:'dd/MM/YYY'}}</span>
-                    <span class="subtitle-2" *ngSwitchCase="'Encerrada'">{{sprint.status}} em {{sprint.endDate | date:'dd/MM/YYY'}}</span>
-                    <span class="subtitle-2" *ngSwitchCase="'Não iniciada'">Inicia em {{sprint.startDate | date:'dd/MM/YYY'}}</span>
-                </ng-container> -->
+                <div class="column flex__end-vertical-align">
+                    <span class="body-2">{{squad.scoreGoal}}% da meta</span>
+                    <span class="body-2">{{squad.score}}% do total</span>
+                </div>
             </button>
-
-            <div class="column" *ngIf="!squads.length">
+            <div class="column" *ngIf="!sprint.squads.length">
                 <h6>Oooops!</h6>
                 <span class="subtitle-1">Não há nada para mostrar aqui :( </span>
             </div>

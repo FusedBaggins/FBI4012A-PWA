@@ -9,6 +9,7 @@ class Sprint extends Model {
     startDate!: Date;
     endDate!: Date;
     squads!: any;
+    sprintConfiguration!: any;
 }
 
 Sprint.init(
